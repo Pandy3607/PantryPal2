@@ -1,35 +1,62 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import Constants from "expo-constants";
+import * as Notifications from "expo-notifications";
+import { Stack, useRouter } from "expo-router";
+import { useEffect, useRef } from "react";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { evaluateDay, resetDailyGoals } from "../../services/cycleService";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const isExpoGo = Constants.appOwnership === "expo";
+
+if (!isExpoGo) {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+      shouldShowBanner: true,
+      shouldShowList: true,
+    }),
+  });
+}
+
+export default function RootLayout() {
+  const router = useRouter();
+  const routerRef = useRef(router);
+
+  useEffect(() => {
+    routerRef.current = router;
+  }, [router]);
+
+  useEffect(() => {
+    if (isExpoGo) return;
+
+    const subscription =
+      Notifications.addNotificationResponseReceivedListener(async () => {
+        const userId = "demoUser";
+        const result = await evaluateDay(userId);
+
+        if (result.success) {
+          routerRef.current.push("/(tabs)/SuccessScreen");
+        } else {
+          routerRef.current.push("/(tabs)/FailScreen");
+        }
+
+        await resetDailyGoals(userId);
+      });
+
+    return () => subscription.remove();
+  }, []);
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+    <Stack>
+      <Stack.Screen name="Home" options={{ title: "Home" }} />
+      <Stack.Screen name="GoalScreen" options={{ title: "My Goals" }} />
+      <Stack.Screen name="DailyChecklist" options={{ title: "Daily Checklist" }} />
+      <Stack.Screen name="AboutUs" options={{ title: "About Us" }} />
+      <Stack.Screen name="Settings" options={{ title: "Settings" }} />
+      <Stack.Screen name="AskAI" options={{ title: "Ask AI" }} />
+      <Stack.Screen name="SuccessScreen" options={{ title: "Success" }} />
+      <Stack.Screen name="FailScreen" options={{ title: "Try Again" }} />
+    </Stack>
   );
 }
