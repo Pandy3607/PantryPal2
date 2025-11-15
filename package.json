@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "goalappfixed",
   "main": "expo-router/entry",
   "version": "1.0.0",
@@ -50,4 +51,27 @@
     "typescript": "~5.9.2"
   },
   "private": true
+=======
+  "name": "pantry-pal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.0.3",
+    "openai": "^6.9.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
+    "tailwindcss": "^4"
+  }
+>>>>>>> 48ec506efde42df76d44eb533e98496a8284d884
 }
