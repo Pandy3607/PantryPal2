@@ -68,17 +68,17 @@ Keep the answer under 200 words.
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 flex justify-center py-8">
-      <div className="w-full max-w-5xl px-4 space-y-6">
+    <main className="min-h-screen bg-slate-50 text-slate-900 flex justify-center px-4 py-10">
+      <div className="w-full max-w-5xl space-y-6">
         <BackButton />
 
         <section className="grid gap-6 md:grid-cols-[minmax(0,2fr),minmax(0,1.3fr)]">
           {/* LEFT: INPUT CARD */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg shadow-black/30">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md">
             <h1 className="text-xl font-semibold tracking-tight">
-              Ask PantryPal
+              Ask Pantry Pal
             </h1>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-slate-500">
               Tell us your budget, what you have on hand, and what you feel like
               eating. We&apos;ll suggest meals and shopping ideas that fit.
             </p>
@@ -86,13 +86,13 @@ Keep the answer under 200 words.
             <form onSubmit={handleGenerate} className="mt-5 space-y-4">
               {/* DROPDOWN CANNED QUESTION */}
               <div className="space-y-2">
-                <label className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                <label className="text-xs font-medium uppercase tracking-wide text-slate-500">
                   Canned question
                 </label>
                 <select
                   value={selectedQuick}
                   onChange={handleSelectChange}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/60"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/70"
                 >
                   <option value="">Select a question…</option>
                   {quickOptions.map((q) => (
@@ -105,7 +105,7 @@ Keep the answer under 200 words.
 
               {/* QUICK BUTTONS */}
               <div className="space-y-2">
-                <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
                   Or tap a quick option
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ Keep the answer under 200 words.
                         setQuestion(q);
                         setSelectedQuick(q);
                       }}
-                      className="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-slate-100 hover:border-emerald-500 hover:text-emerald-300 transition"
+                      className="rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-800 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-700 transition"
                     >
                       {q}
                     </button>
@@ -127,11 +127,11 @@ Keep the answer under 200 words.
 
               {/* FREE TEXT INPUT */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                <label className="text-xs font-medium uppercase tracking-wide text-slate-500">
                   Ask anything about meals &amp; groceries
                 </label>
                 <textarea
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/60"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/70"
                   rows={3}
                   placeholder="Example: I have chicken, tomatoes, pasta…"
                   value={question}
@@ -142,25 +142,25 @@ Keep the answer under 200 words.
               {/* BUDGET & INGREDIENTS */}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                  <label className="text-xs font-medium uppercase tracking-wide text-slate-500">
                     Weekly budget ($)
                   </label>
                   <input
                     type="number"
                     min={0}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/60"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/70"
                     value={budget}
                     onChange={(e) => setBudget(Number(e.target.value))}
                     placeholder="e.g. 100"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                  <label className="text-xs font-medium uppercase tracking-wide text-slate-500">
                     Ingredients you already have
                   </label>
                   <input
                     type="text"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/60"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/70"
                     value={ingredients}
                     onChange={(e) => setIngredients(e.target.value)}
                     placeholder="eggs, rice, onions, frozen veggies..."
@@ -173,7 +173,7 @@ Keep the answer under 200 words.
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400 disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-500/30 transition hover:bg-emerald-600 disabled:opacity-60"
                 >
                   {loading ? "Generating..." : "Generate AI recommendations"}
                 </button>
@@ -182,15 +182,15 @@ Keep the answer under 200 words.
           </div>
 
           {/* RIGHT: OUTPUT / FEEDBACK */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200 flex flex-col">
-            <p className="text-sm font-semibold">AI Response</p>
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-800 flex flex-col shadow-md">
+            <p className="text-sm font-semibold text-slate-900">AI Response</p>
 
             {aiText ? (
               <>
                 <textarea
                   readOnly
                   rows={8}
-                  className="mt-3 w-full flex-1 rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100"
+                  className="mt-3 w-full flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900"
                   value={aiText}
                 />
 
@@ -200,7 +200,7 @@ Keep the answer under 200 words.
                     className={`flex-1 py-2 rounded-full text-xs font-semibold border ${
                       supportStatus === "support"
                         ? "bg-emerald-500 text-white border-emerald-500"
-                        : "bg-slate-950/80 text-emerald-400 border-emerald-500/70"
+                        : "bg-white text-emerald-700 border-emerald-400"
                     }`}
                   >
                     Support 👍
@@ -210,7 +210,7 @@ Keep the answer under 200 words.
                     className={`flex-1 py-2 rounded-full text-xs font-semibold border ${
                       supportStatus === "dont"
                         ? "bg-rose-500 text-white border-rose-500"
-                        : "bg-slate-950/80 text-rose-400 border-rose-500/70"
+                        : "bg-white text-rose-600 border-rose-300"
                     }`}
                   >
                     Don&apos;t support 👎
@@ -218,7 +218,7 @@ Keep the answer under 200 words.
                 </div>
 
                 {supportStatus && (
-                  <p className="mt-2 text-[11px] text-slate-400">
+                  <p className="mt-2 text-[11px] text-slate-500">
                     Thanks for your feedback —{" "}
                     {supportStatus === "support"
                       ? "you supported this suggestion."
@@ -227,7 +227,7 @@ Keep the answer under 200 words.
                 )}
               </>
             ) : (
-              <p className="mt-3 text-xs text-slate-400">
+              <p className="mt-3 text-xs text-slate-500">
                 Your AI answer will appear here after you submit your question.
                 You&apos;ll be able to mark whether you support the suggestion or
                 not so future recommendations improve.
